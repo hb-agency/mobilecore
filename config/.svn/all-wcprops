@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/winanscreative-ext/!svn/ver/8/trunk/system/modules/mobilecore/config
+END
+runonce.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/winanscreative-ext/!svn/ver/29/trunk/system/modules/mobilecore/config/runonce.php
+END
+database.sql
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/winanscreative-ext/!svn/ver/29/trunk/system/modules/mobilecore/config/database.sql
+END
+config.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/winanscreative-ext/!svn/ver/29/trunk/system/modules/mobilecore/config/config.php
+END
