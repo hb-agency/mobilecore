@@ -113,16 +113,6 @@ class UATemplate extends UAController
 	  	if(!$this->blnMobile)
 	  		return;
 	  		
-	  	//Look for an override to set/unset
-	  	if($this->Input->get('m')=='false')
-	  	{
-	  		$_SESSION['MC-OVERRIDE'][$this->strAgent] = '1';
-	  	}
-	  	elseif ($this->Input->get('m')=='true')
-	  	{
-	  		unset($_SESSION['MC-OVERRIDE'][$this->strAgent]);
-	  	}
-	  		
 	  	//Set up DB values based on UA
 	  	$UAModules = $this->strAgent. 'modules';
 	  	$UATemplate = $this->strAgent. 'template';

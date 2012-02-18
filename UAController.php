@@ -59,6 +59,18 @@ abstract class UAController extends Controller
 			}
 		}
 		
+		//Override - Look for an override to set/unset
+		if ($this->Input->get('m')=='true' && isset($_SESSION['MC-OVERRIDE']))
+	  	{
+	  		unset($_SESSION['MC-OVERRIDE']);
+	  	}
+	  	elseif($this->Input->get('m')=='false' || $_SESSION['MC-OVERRIDE'])
+	  	{
+	  		$_SESSION['MC-OVERRIDE'] = '1';
+	  		$this->strAgent = 'regular';
+	  		$this->blnMobile = false;
+	  	}
+		
 		//HOOK to set another user agent string
 		if (isset($GLOBALS['TL_HOOKS']['setUAType']) && is_array($GLOBALS['TL_HOOKS']['setUAType']))
 		{
