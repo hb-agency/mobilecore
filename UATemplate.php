@@ -18,18 +18,25 @@
  * PHP version 5
  * @copyright  Winans Creative 2010
  * @author     Blair Winans <blair@winanscreative.com>
+ * @author     Adam Fisher <adam@winanscreative.com>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
 class UATemplate extends UAController
 {
-
+  
 	/**
-	* Required Hook for outputFrontendTemplate
-	* @param string
-	* @param string
-	* @return string
-	*/  
+	 * Required Hook for outputFrontendTemplate
+	 * 
+	 * Class:	FrontendTemplate
+	 * Method:	parse
+	 * Hook:	$GLOBALS['TL_HOOKS']['parseFrontendTemplate']
+	 *
+	 * @access	public
+	 * @param	string
+	 * @param	string
+	 * @return	string
+	 */
 	public function parseUATemplate($strBuffer, $strTemplate)
 	{
 		//Need to auto-adjust images that are too wide
@@ -101,13 +108,20 @@ class UATemplate extends UAController
 	  	return $strBuffer;
 	}
 	
-	
+	 
 	/**
-	* Required Hook for generatePage
-	* @param string
-	* @param string
-	* @return string
-	*/  
+	 * Required Hook for generatePage
+	 * 
+	 * Class:	PageRegular
+	 * Method:	generate
+	 * Hook:	$GLOBALS['TL_HOOKS']['generatePage']
+	 *
+	 * @access	public
+	 * @param	object
+	 * @param	object
+	 * @param	object
+	 * @return	void
+	 */
 	public function generateUAPage($objPage, $objLayout, $objPageRegular)
 	{
 	  	if(!$this->blnMobile)
@@ -116,7 +130,12 @@ class UATemplate extends UAController
 	  	//Set up DB values based on UA
 	  	$UAModules = $this->strAgent. 'modules';
 	  	$UATemplate = $this->strAgent. 'template';
+	  	$UADoctype = $this->strAgent. 'doctype';
 	  	$UADns = $this->strAgent. 'Dns';
+	  	
+		list($strFormat, $strVariant) = explode('_', $objPage->{$UADoctype});
+		$objPage->outputFormat = $strFormat;
+		$objPage->outputVariant = $strVariant;
 	  	
 	  	//Determine whether to redirect to mobile subdomain
 	  	$objRoot = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")->limit(1)->execute($objPage->rootId);
@@ -185,13 +204,17 @@ class UATemplate extends UAController
 
 	/**
 	 * Create a new mobile page template
-	 * @param object
-	 * @param object
+	 *
+	 * @access	protected
+	 * @param	object
+	 * @param	object
+	 * @param	object
+	 * @return	void
 	 */
 	protected function createUATemplate(Database_Result $objPage, Database_Result $objLayout, $objPageRegular)
-	{		
+	{	  	
 		$objPageRegular->Template = new FrontendTemplate($objPage->template);
-
+		
 		// Generate the DTD
 		if ($objPage->outputFormat == 'xhtml')
 		{

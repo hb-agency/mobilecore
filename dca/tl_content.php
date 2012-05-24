@@ -18,6 +18,7 @@
  * PHP version 5
  * @copyright  Winans Creative 2010
  * @author     Blair Winans <blair@winanscreative.com>
+ * @author     Adam Fisher <adam@winanscreative.com>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
@@ -25,20 +26,13 @@
 /**
  * Palettes
  */
+$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content_mobilecore', 'setHideFields');
 
-foreach($GLOBALS['TL_DCA']['tl_content']['palettes'] as $palette=>$fields)
-{
-	if(is_string($fields))
-	{
-		$GLOBALS['TL_DCA']['tl_content']['palettes'][$palette] = $fields . ';{mobile_legend:hide},mobilehide,tablethide,regularhide';
-		
-	}
-}
+
 
 /**
  * Fields
  */
-
 $GLOBALS['TL_DCA']['tl_content']['fields']['mobilehide'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['mobilehide'],
@@ -66,3 +60,22 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['regularhide'] = array
 	'inputType'               => 'checkbox',
 	'eval'                    => array('tl_class'=>'w50')
 );
+
+
+
+class tl_content_mobilecore extends tl_content
+{
+	public function setHideFields()
+	{
+		foreach($GLOBALS['TL_DCA']['tl_content']['palettes'] as $palette=>$fields)
+		{
+			if (is_string($fields))
+			{
+				$GLOBALS['TL_DCA']['tl_content']['palettes'][$palette] = $fields . ';{mobile_legend:hide},mobilehide,tablethide,regularhide';
+				
+			}
+		}
+	}
+}
+
+?>

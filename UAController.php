@@ -18,6 +18,7 @@
  * PHP version 5
  * @copyright  Winans Creative 2010
  * @author     Blair Winans <blair@winanscreative.com>
+ * @author     Adam Fisher <adam@winanscreative.com>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
@@ -58,7 +59,7 @@ abstract class UAController extends Controller
 				$this->strAgent = 'mobile';
 			}
 		}
-		
+
 		//Override - Look for an override to set/unset
 		if ($this->Input->get('m')=='true' && isset($_SESSION['MC-OVERRIDE']))
 	  	{
@@ -100,7 +101,7 @@ abstract class UAController extends Controller
 
 	public function getUAImage($image, $width, $height, $mode, $strCacheName, $objFile)
 	{
-		if(!$this->blnMobile)
+		if (!$this->blnMobile || !is_file(TL_ROOT . '/' . $image))
 			return null;
 				
 		// Return the path to the original image if the GDlib cannot handle it
