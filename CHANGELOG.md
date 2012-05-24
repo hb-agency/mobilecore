@@ -2,7 +2,7 @@ MobileCore Changelog
 ===========================
 
 
-Version 1.0.1 (2012-05-23)
+Version 1.0.0 RC 1 (2012-05-23)
 ----------------------------------------
 - Added the ability to set the output format (doctype).
 - Minor bug fixes.
