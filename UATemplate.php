@@ -53,7 +53,9 @@ class UATemplate extends UAController
 		    foreach($objDoc->find('img') as $tag) 
 		    {
 		       $fileSrc = $tag->getAttribute('src');
+		       $blnAddDomainPrefix = false;
 		       $blnAddSubdomainPrefix = false;
+		       $strDomain = '';
 		       
 		       //Check for subdomain settings
 		       if(stripos($fileSrc,TL_FILES_URL)!==false)
@@ -61,6 +63,26 @@ class UATemplate extends UAController
 		       		$blnAddSubdomainPrefix = true;
 		       		$strURL = parse_url($fileSrc);
 		       		$fileSrc = substr($strURL['path'],1);
+		       }
+		       //Check for external URL or one that we may not be able to resize
+		       elseif( stripos($fileSrc,'http')!==false )
+		       {
+			       	$strURL = parse_url($fileSrc);
+			       	//Check to see if it is on the same domain and file exists... If so we can resize it.
+			       	if (file_exists(TL_ROOT . $strURL['path']))
+					{
+						$fileSrc = substr($strURL['path'],1);
+						$strDomain = $strURL['scheme'] . '//:' . $strURL['host'];
+					}
+					//Otherwise we have an external image
+					else
+					{	
+						//All we can do here with external images is reset and set the width attribute
+						$tag->removeAttribute('width');
+						$tag->removeAttribute('height');
+						$tag->setAttribute('width', $intMaxWidth);
+						continue;
+					}
 		       }
 		       
 		       $objFile = new File($fileSrc);
