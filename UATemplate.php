@@ -106,7 +106,7 @@ class UATemplate extends UAController
 						$newImage = $this->getUAImage($src, $width, $height, $mode, $strCacheName, $objFile);
 					}
 					
-					$newImageSrc = $blnAddSubdomainPrefix ? TL_FILES_URL. '/' .$newImage : $newImage;
+					$newImageSrc = $blnAddSubdomainPrefix ? TL_FILES_URL. '/' .$newImage : ( $blnAddDomainPrefix ? $strDomain . '/' . $newImage : $newImage);
 					
 			       	$tag->setAttribute('src', $newImageSrc);
 			       	$tag->removeAttribute('width');
