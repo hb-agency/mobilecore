@@ -25,7 +25,7 @@
 /**
  * Palettes
  */
-$GLOBALS['TL_DCA']['tl_layout']['palettes']['default'] = str_replace('{expert_legend:hide}', '{mobile_legend:hide},mobilestylesheet,mobilemodules,mobiletemplate,mobilehead,mobilemootools,mobilescript;{tablet_legend:hide},tabletstylesheet,tabletmodules,tablettemplate,tablethead,tabletmootools,tabletscript;{expert_legend:hide}', $GLOBALS['TL_DCA']['tl_layout']['palettes']['default']); 
+$GLOBALS['TL_DCA']['tl_layout']['palettes']['default'] = str_replace('{expert_legend:hide}', '{mobile_legend:hide},mobilestylesheet,mobilemodules,mobiletemplate,mobiledoctype,mobilehead,mobilemootools,mobilescript;{tablet_legend:hide},tabletstylesheet,tabletmodules,tablettemplate,tabletdoctype,tablethead,tabletmootools,tabletscript;{expert_legend:hide}', $GLOBALS['TL_DCA']['tl_layout']['palettes']['default']); 
 
 
 /**
@@ -59,6 +59,20 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['mobiletemplate'] = array
 	'flag'                    => 11,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_layout', 'getPageTemplates'),
+	'eval'                    => array('tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_layout']['fields']['mobiledoctype'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['mobiledoctype'],
+	'exclude'                 => true,
+	'default'				  => 'html5',
+	'filter'                  => true,
+	'sorting'                 => true,
+	'flag'                    => 11,
+	'inputType'               => 'select',
+	'options'                 => array('html5', 'xhtml_strict', 'xhtml_trans'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 	'eval'                    => array('tl_class'=>'w50')
 );
 
@@ -119,6 +133,20 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['tablettemplate'] = array
 	'flag'                    => 11,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_layout', 'getPageTemplates'),
+	'eval'                    => array('tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_layout']['fields']['tabletdoctype'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['tabletdoctype'],
+	'exclude'                 => true,
+	'default'				  => 'html5',
+	'filter'                  => true,
+	'sorting'                 => true,
+	'flag'                    => 11,
+	'inputType'               => 'select',
+	'options'                 => array('html5', 'xhtml_strict', 'xhtml_trans'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 	'eval'                    => array('tl_class'=>'w50')
 );
 
