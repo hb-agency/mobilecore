@@ -155,7 +155,7 @@ class UATemplate extends UAController
 	  	$UADoctype = $this->strAgent. 'doctype';
 	  	$UADns = $this->strAgent. 'Dns';
 	  	
-		list($strFormat, $strVariant) = explode('_', $objPage->{$UADoctype});
+		list($strFormat, $strVariant) = explode('_', $objLayout->{$UADoctype});
 		$objPage->outputFormat = $strFormat;
 		$objPage->outputVariant = $strVariant;
 	  	
