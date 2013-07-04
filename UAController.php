@@ -101,6 +101,8 @@ abstract class UAController extends Controller
 
 	public function getUAImage($image, $width, $height, $mode, $strCacheName, $objFile)
 	{
+		$image = rawurldecode($image);
+		
 		if (!$this->blnMobile || !is_file(TL_ROOT . '/' . $image))
 			return null;
 				
